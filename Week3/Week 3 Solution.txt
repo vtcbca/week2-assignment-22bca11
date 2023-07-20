@@ -1,0 +1,199 @@
+1. Creating Table
+
+import sqlite3 as sq
+
+conn = sq.connect('ESM.db')
+cur = conn.cursor()
+q = "Create table Employee(eid int primary key,ename text,dept text,basic int,Branch text)"
+cur.execute(q)
+conn.commit()
+conn.close()
+
+
+2. Insert 5 Records Directly
+
+import sqlite3 as sq
+
+conn = sq.connect('ESM.db')
+cur = conn.cursor()
+q = "Insert into Employee values(1,'Om','Marketing',50000,'Vyara'),(2,'Sai','Production',45000,'Bardoli'),(3,'Ram','Marketing',50000,'Vyara'),(4,'Krishna','Teamlead',65000,'Mumbai'),(5,'Ganesh','Production',45000,'Noida')"
+cur.execute(q)
+conn.commit()
+conn.close()
+
+
+
+3. Insert 5 Records Using Tuple.
+
+import sqlite3 as sq
+
+conn = sq.connect('ESM.db')
+cur = conn.cursor()
+q1 = [(6, 'Vayu', 'Production', 50000, 'Ahmedabad'),(7, 'Indra', 'Tech', 70000, 'Benglore'),(8, 'Hanuman', 'HR', 80000, 'Vadodara'),(9, 'Bharat', 'Marketing', 65000, 'Bharuch'),(10, 'Shivji', 'Representative', 90000, 'Surat'),]
+cur.executemany("INSERT INTO Employee (eid, ename, dept, basic, Branch) VALUES (?, ?, ?, ?, ?)", q1)
+conn.commit()
+conn.close()
+
+
+4. Insert 5 Records From User.
+
+import sqlite3 as sq
+
+conn = sq.connect('ESM.db')
+cur = conn.cursor()
+q2 = "Insert into Employee values(?,?,?,?,?)"
+l=[]
+for i in range(5):
+    l1=[]
+    eid = int(input('E-id :'))
+    l1.append(eid)
+
+    ename = input('Name :')
+    l1.append(ename)
+
+    dept = input('Department :')
+    l1.append(dept)
+
+    basic = int(input('Salary :'))
+    l1.append(basic)
+
+    branch = input('Name of Branch :')
+    l1.append(branch)
+
+    l.append(l1)
+
+cur.executemany(q2,l)
+conn.commit()
+conn.close()
+
+
+5. Update Records Who are From "Surat" Branch With Increament In Salary 10%. 
+
+import sqlite3 as sq
+
+conn = sq.connect('ESM.db')
+cur = conn.cursor()
+U="Update Employee set basic=basic+(basic*10)/100 where Branch='Surat'"
+cur.execute(U)
+conn.commit()
+conn.close()
+
+6. Print All Records.
+
+
+import sqlite3 as sq
+
+conn = sq.connect('ESM.db')
+cur = conn.cursor()
+P = "select * from Employee"
+cur.execute(P)
+R=cur.fetchall()
+for i in R:
+    print(R)
+conn.commit()
+conn.close()
+
+
+7.Records where Department is HR And IT.
+
+import sqlite3 as sq
+
+conn = sq.connect('ESM.db')
+cur = conn.cursor()
+q= "select * from Employee where dept like 'HR' or dept like 'IT' "
+cur.execute(q)
+R=cur.fetchall()
+for i in R:
+    print(R)
+conn.commit()
+conn.close()
+
+
+8. Records by Sorted form of Department.
+
+import sqlite3 as sq
+
+conn = sq.connect('ESM.db')
+cur = conn.cursor()
+q= "select * from Employee Order by dept"
+cur.execute(q)
+R=cur.fetchall()
+for i in R:
+    print(R)
+conn.commit()
+conn.close()
+
+
+9. Records With Basic>6000.
+
+import sqlite3 as sq
+
+conn = sq.connect('ESM.db')
+cur = conn.cursor()
+q1 = "select * from Employee where basic>6000 "
+cur.execute(q1)
+R=cur.fetchall()
+for i in R:
+    print(R)
+conn.commit()
+conn.close()
+
+
+10. Employee name With having "R" at second.
+
+import sqlite3 as sq
+
+conn = sq.connect('ESM.db')
+cur = conn.cursor()
+q2 ="select * from Employee where ename like '_R%' "
+cur.execute(q2)
+R=cur.fetchall()
+for i in R:
+    print(R)
+conn.commit()
+conn.close()
+
+
+11. Grouped Records of Employee who are from Account or Inventory.
+
+import sqlite3 as sq
+
+conn = sq.connect('ESM.db')
+cur = conn.cursor()
+q3 = "select * from Employee group by dept having dept like 'Account' or dept like 'Inventory'"
+cur.execute(q3)
+R=cur.fetchall()
+for i in R:
+    print(R)
+conn.commit()
+conn.close()
+
+
+12.Records with Branch name in Descending Order.
+
+import sqlite3 as sq
+
+conn = sq.connect('ESM.db')
+cur = conn.cursor()
+q4 = "select * from Employee order by Branch Desc"
+cur.execute(q4)
+R=cur.fetchall()
+for i in R:
+    print(R)
+conn.commit()
+conn.close()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
