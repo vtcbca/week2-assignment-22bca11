@@ -1,0 +1,41 @@
+1. Create Table of Student & Details
+
+sqlite> create table stud00(id text primary key,name text);
+sqlite> create table stud_details00(id text not null,city text,mobile number,foreign key(id)references stud00(id));
+
+2. Insert minimum 10 Records
+sqlite> insert into stud00 values((1,'jai'),(2,'shree'),(3,'ram'),(4,'shivji'),(5,'krishna'),(6,'sitaji'),(7,'Hanuman'),(8,'laxman'),(9,'Ganesha'),(10,'Bheem'));
+Error: table stud00 has 2 columns but 10 values were supplied
+sqlite> insert into stud00 values(1,'jai'),(2,'shree'),(3,'ram'),(4,'shivji'),(5,'krishna'),(6,'sitaji'),(7,'Hanuman'),(8,'laxman'),(9,'Ganesha'),(10,'Bheem');
+sqlite> insert into stud_detais00 values(1,'surat',1098765432),(2,'Bardoli',9620241186),(3,'Vyara',8980956321),(4,'Baroda',9586544862),(5,'Katchh',7755886633),(6,'Surendranagar',6655887744),(7,'Dahod',7889665544),(8,'Diu',9877445522),(9,'Rajkot',9756218562),(10,'Songadh',7896968532);
+Error: no such table: stud_detais00
+sqlite> insert into stud_details00 values(1,'surat',1098765432),(2,'Bardoli',9620241186),(3,'Vyara',8980956321),(4,'Baroda',9586544862),(5,'Katchh',7755886633),(6,'Surendranagar',6655887744),(7,'Dahod',7889665544),(8,'Diu',9877445522),(9,'Rajkot',9756218562),(10,'Songadh',7896968532);
+
+3. Students From Surat.
+
+sqlite> select * from stud00 where city='surat';
+Error: no such column: city
+sqlite> select * from stud_details00 where city='surat';
+1|surat|1098765432
+
+4. Students With City Name Starts with "B".
+
+sqlite> select * from stud_details00 where city LIKE 'B%';
+2|Bardoli|9620241186
+4|Baroda|9586544862
+
+5. Update Mobile no of Student from surat.
+
+sqlite> update stud_details00 set mobile=8865645544 where city='surat';
+sqlite> select * from stud_details00;
+1|surat|8865645544
+2|Bardoli|9620241186
+3|Vyara|8980956321
+4|Baroda|9586544862
+5|Katchh|7755886633
+6|Surendranagar|6655887744
+7|Dahod|7889665544
+8|Diu|9877445522
+9|Rajkot|9756218562
+10|Songadh|7896968532
+sqlite>
